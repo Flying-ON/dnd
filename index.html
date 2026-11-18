@@ -759,6 +759,11 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
 
 
   <style>
+    #WIX_ADS,
+    .WIX_ADS {
+      display: none !important;
+    }
+
     #interest-form {
       --interest-ink: #f4ebd9;
       --interest-muted: #e4d7bf;
@@ -896,6 +901,11 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
       color: #ffb6a8;
     }
 
+    #comp-mwlexrdq,
+    #comp-mwlexrfd {
+      margin-bottom: 0 !important;
+    }
+
     @media (max-width: 560px) {
       #interest-form .interest-fields {
         grid-template-columns: 1fr;
@@ -911,7 +921,7 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
     <div class="interest-card">
       <p class="interest-intro">Complete the form and we’ll be in touch. If another day works better, include it in your note.</p>
 
-      <form id="interest-signup" action="https://script.google.com/macros/s/AKfycbzGnlCWXY3t9BSmcfHwSZUnn8pJOCLg20U93miMek5L0lQzqmpV6i40GsUtyZPn9XNnkw/exec" method="post">
+      <form id="interest-signup" action="https://script.google.com/macros/s/AKfycbwyuMOh5CPRe2nNot7NAAvNx79DPYCPL5fSo3Xqi_Iofp3ZnJBAZCoMAeFagALRq2LLZA/exec" method="post">
         <div class="interest-fields">
           <div>
             <label for="interest-parent-name">Parent name <span class="interest-required" aria-hidden="true">*</span></label>
@@ -966,7 +976,7 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
           });
           form.reset();
           status.dataset.state = 'success';
-          status.textContent = 'Thanks! Your interest form has been sent. We’ll be in touch.';
+          status.textContent = 'Thanks!  I’ll be in touch soon!';
         } catch (error) {
           status.dataset.state = 'error';
           status.textContent = 'We couldn’t send your form. Please check your connection and try again.';
