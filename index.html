@@ -136,8 +136,8 @@
     .cloud-art {
       position: absolute;
       bottom: 1.25rem;
-      left: max(-8rem, calc((100vw - var(--content-width)) / 2 - 13rem));
-      width: clamp(18rem, 38vw, 36rem);
+      left: clamp(-5rem, calc((100vw - var(--content-width)) / 2 - 18rem), 12rem);
+      width: clamp(22rem, 43vw, 42rem);
       height: auto;
       pointer-events: none;
     }
@@ -156,6 +156,21 @@
       text-align: center;
     }
 
+    .about-section {
+      overflow: hidden;
+    }
+
+    .about-section .content {
+      position: relative;
+      padding-bottom: clamp(22rem, 26vw, 26rem);
+    }
+
+    .about-section .section-title,
+    .about-copy {
+      position: relative;
+      z-index: 1;
+    }
+
     .about-copy {
       width: min(100%, 51rem);
       margin-inline: auto;
@@ -168,6 +183,31 @@
       width: min(100%, 68rem);
       height: auto;
       margin: 2.5rem auto -1rem;
+    }
+
+    .mountain-art {
+      position: absolute;
+      right: -8rem;
+      bottom: 0;
+      width: min(85vw, 68rem);
+      margin: 0;
+      pointer-events: none;
+    }
+
+    .details-section {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: clamp(11rem, 18vw, 15rem);
+    }
+
+    .forest-art {
+      position: absolute;
+      bottom: .75rem;
+      left: max(-5rem, calc((100vw - var(--content-width)) / 2 - 8rem));
+      width: clamp(30rem, 46vw, 46rem);
+      height: auto;
+      margin: 0;
+      pointer-events: none;
     }
 
     .quote-section {
@@ -191,6 +231,14 @@
       grid-template-columns: minmax(14rem, .8fr) minmax(0, 1.2fr);
       align-items: center;
       gap: clamp(2rem, 6vw, 5rem);
+    }
+
+    .dm-card {
+      padding: clamp(1.25rem, 4vw, 3rem);
+      border: 1px solid var(--line);
+      border-radius: .75rem;
+      background: rgba(244, 235, 217, .55);
+      box-shadow: 0 .75rem 2rem rgba(44, 30, 22, .08);
     }
 
     .dm-photo {
@@ -369,8 +417,28 @@
 
       .cloud-art {
         bottom: .75rem;
-        left: -5rem;
-        width: min(70vw, 25rem);
+        left: -3rem;
+        width: min(82vw, 28rem);
+      }
+
+      .about-section .content {
+        padding-bottom: 0;
+      }
+
+      .mountain-art {
+        position: static;
+        width: min(100%, 48rem);
+        margin: 2rem auto 0;
+      }
+
+      .details-section {
+        padding-bottom: 11rem;
+      }
+
+      .forest-art {
+        bottom: .5rem;
+        left: -3rem;
+        width: min(88vw, 30rem);
       }
 
       .dm-layout,
@@ -421,11 +489,11 @@
       <img class="cloud-art" src="https://static.wixstatic.com/media/a1ee96_47da4bcc14d94f78abb0f4e5fdaaa53b~mv2.png/v1/fill/w_2118,h_706,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Modern%20Hillside%20Villas.png" alt="" aria-hidden="true">
     </section>
 
-    <section class="section" aria-labelledby="about-title">
+    <section class="section about-section" aria-labelledby="about-title">
       <div class="content">
         <h2 class="section-title" id="about-title">About</h2>
         <p class="about-copy">While Dungeons and Dragons is technically a game, it feels more like a creative medium. As a group, we build a story together, figuring out how to collaborate, cooperate, and problem solve along the way. Although the Dungeon Master is in charge of creating the world, the players and their characters ultimately are the ones to drive the story.</p>
-        <img class="landscape-art" src="https://static.wixstatic.com/media/a1ee96_1b3b4d8cb2f64e95b6a3ac38c21e7051~mv2.png/v1/fill/w_2187,h_719,al_c,q_90,enc_avif,quality_auto/Modern%20Hillside%20Villas.png" alt="" aria-hidden="true">
+        <img class="landscape-art mountain-art" src="https://static.wixstatic.com/media/a1ee96_1b3b4d8cb2f64e95b6a3ac38c21e7051~mv2.png/v1/fill/w_2187,h_719,al_c,q_90,enc_avif,quality_auto/Modern%20Hillside%20Villas.png" alt="" aria-hidden="true">
       </div>
     </section>
 
@@ -436,11 +504,15 @@
     </section>
 
     <section class="section" aria-labelledby="dm-title">
-      <div class="content dm-layout">
-        <img class="dm-photo" src="https://static.wixstatic.com/media/a1ee96_ec6305c6121e4db98d5c610385f037c4~mv2.png/v1/fill/w_894,h_744,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202026-11-17%20at%205_20_10%E2%80%AFPM.png" alt="Owen, the Dungeon Master">
-        <div class="dm-copy">
-          <h2 class="section-title" id="dm-title">Your DM</h2>
-          <p>Owen (ON) has been running Dungeons and Dragons games for six years. He's run one-shots and full campaigns for everyone age 5 to 85! He focuses on giving everyone in the group a chance to shine, and adapts every game to the players.</p>
+      <div class="content">
+        <div class="dm-card">
+          <div class="dm-layout">
+            <img class="dm-photo" src="https://static.wixstatic.com/media/a1ee96_ec6305c6121e4db98d5c610385f037c4~mv2.png/v1/fill/w_894,h_744,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202026-11-17%20at%205_20_10%E2%80%AFPM.png" alt="Owen, the Dungeon Master">
+            <div class="dm-copy">
+              <h2 class="section-title" id="dm-title">Your DM</h2>
+              <p>Owen (ON) has been running Dungeons and Dragons games for six years. He's run one-shots and full campaigns for everyone age 5 to 85! He focuses on giving everyone in the group a chance to shine, and adapts every game to the players.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -451,14 +523,13 @@
       </div>
     </section>
 
-    <section class="section" aria-label="Session details and interest form">
+    <section class="section details-section" aria-label="Session details and interest form">
       <div class="content interest-layout">
         <div class="details-copy">
           <h2 class="section-title">Details</h2>
           <p><strong>When:</strong> Hoping to start weekly on Wednesdays from 4–6 after Thanksgiving. If another day works better, mention that in the interest form!</p>
           <p><strong>Price:</strong> $30 per session</p>
           <p><strong>Location:</strong> TBD</p>
-          <img class="landscape-art" src="https://static.wixstatic.com/media/a1ee96_9f9fd4f50e3c4784ae9e5f7c7d3c954f~mv2.png/v1/fill/w_2172,h_723,al_c,q_90,enc_avif,quality_auto/Modern%20Hillside%20Villas.png" alt="" aria-hidden="true">
         </div>
 
         <section class="interest-panel" id="interest-form" aria-labelledby="interest-title">
@@ -490,6 +561,7 @@
           </form>
         </section>
       </div>
+      <img class="forest-art" src="https://static.wixstatic.com/media/a1ee96_9f9fd4f50e3c4784ae9e5f7c7d3c954f~mv2.png/v1/fill/w_2172,h_723,al_c,q_90,enc_avif,quality_auto/Modern%20Hillside%20Villas.png" alt="" aria-hidden="true">
     </section>
   </main>
 
