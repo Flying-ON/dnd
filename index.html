@@ -759,6 +759,10 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
 
 
   <style>
+    :root {
+      --wix-ads-height: 0px !important;
+    }
+
     #WIX_ADS,
     .WIX_ADS {
       display: none !important;
@@ -771,6 +775,7 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
       box-sizing: border-box;
       width: 100%;
       padding: 0;
+      scroll-margin-top: 1.5rem;
       color: var(--interest-ink);
       background: transparent;
       font-family: "dm-sans", "DM Sans", sans-serif;
@@ -919,7 +924,7 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
 
   <section id="interest-form" aria-label="Interest form">
     <div class="interest-card">
-      <p class="interest-intro">Complete the form and we’ll be in touch. If another day works better, include it in your note.</p>
+      <p class="interest-intro">Let me know if another day works better or if you're out of the age range.</p>
 
       <form id="interest-signup" action="https://script.google.com/macros/s/AKfycbwyuMOh5CPRe2nNot7NAAvNx79DPYCPL5fSo3Xqi_Iofp3ZnJBAZCoMAeFagALRq2LLZA/exec" method="post">
         <div class="interest-fields">
@@ -929,7 +934,7 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
           </div>
           <div>
             <label for="interest-kid-name">Kid name <span class="interest-required" aria-hidden="true">*</span></label>
-            <input id="interest-kid-name" name="kidName" type="text" autocomplete="off" maxlength="120" required>
+            <input id="interest-kid-name" name="studentName" type="text" autocomplete="off" maxlength="120" required>
           </div>
           <div>
             <label for="interest-email">Email <span class="interest-required" aria-hidden="true">*</span></label>
@@ -948,11 +953,19 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
 
   <script>
     (() => {
+      document.getElementById('WIX_ADS')?.remove();
+
       const formSection = document.getElementById('interest-form');
       const existingInterestPanel = document.getElementById('comp-mwlexrfd');
       if (formSection && existingInterestPanel) {
         existingInterestPanel.append(formSection);
       }
+
+      document.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('#comp-mwlg4u54')) {
+          formSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
 
       const form = document.getElementById('interest-signup');
       const status = document.getElementById('interest-status');
