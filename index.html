@@ -314,6 +314,52 @@
       grid-column: 1 / -1;
     }
 
+    .choice-group {
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .choice-group legend {
+      margin-bottom: .45rem;
+      font-size: .95rem;
+      font-weight: 600;
+    }
+
+    .choice-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+
+    .choice-button {
+      min-height: 2.75rem;
+      padding: .55rem 1rem;
+      border: 1px solid #c2b8a8;
+      border-radius: 999px;
+      color: var(--ink);
+      background: rgba(255, 252, 245, .88);
+      cursor: pointer;
+      font: 600 .95rem "DM Sans", sans-serif;
+      transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+    }
+
+    .choice-button:hover {
+      border-color: var(--rust);
+    }
+
+    .choice-button[aria-pressed="true"] {
+      border-color: var(--rust);
+      color: var(--paper);
+      background: var(--rust);
+    }
+
+    .choice-button:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+
     label {
       display: block;
       margin-bottom: .4rem;
@@ -531,7 +577,7 @@
       <div class="content interest-layout">
         <div class="details-copy">
           <h2 class="section-title">Details</h2>
-          <p><strong>When:</strong> Hoping to start weekly on Wednesdays from 4–6 after Thanksgiving. If another day works better, mention that in the interest form!</p>
+          <p><strong>When:</strong> Weekday after school. Let me know what days/times are best for you!</p>
           <p><strong>Price:</strong> $30 per session</p>
           <p><strong>Location:</strong> TBD</p>
         </div>
@@ -539,7 +585,7 @@
         <section class="interest-panel" id="interest-form" aria-labelledby="interest-title">
           <h2 id="interest-title">Interest Form</h2>
           <p class="interest-intro">Let me know if another day works better or if you're out of the age range.</p>
-          <form id="interest-signup" action="https://script.google.com/macros/s/AKfycbwSM-OKMFdlJVrcOcc5Qcm43PkcCvnKoos2v7FQHzevdzhuG8PROFaC-aKnzcRwc49zVw/exec" method="post" autocomplete="on">
+          <form id="interest-signup" action="https://script.google.com/macros/s/AKfycbxWZRlSPg7wUlKo7Sxw6LcJfem4KDpUR3M4iz3296xIGVSbMCUnWeUjijTeGrHGUm-V/exec" method="post" autocomplete="on">
             <div class="interest-fields">
               <div>
                 <label for="parent-name">Parent name <span class="required" aria-hidden="true">*</span></label>
@@ -553,9 +599,25 @@
                 <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
                 <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
               </div>
+              <fieldset class="choice-group field-wide" data-choice-name="availabilityDays">
+                <legend>Days/times that work for you (select any)</legend>
+                <div class="choice-buttons">
+                  <button class="choice-button" type="button" aria-pressed="false" data-choice-value="Mon">Mon</button>
+                  <button class="choice-button" type="button" aria-pressed="false" data-choice-value="Wed">Wed</button>
+                  <button class="choice-button" type="button" aria-pressed="false" data-choice-value="Thu">Thu</button>
+                </div>
+                <input type="hidden" name="availabilityDays" value="">
+              </fieldset>
+              <fieldset class="choice-group field-wide" data-choice-name="preferredTimes">
+                <div class="choice-buttons">
+                  <button class="choice-button" type="button" aria-pressed="false" data-choice-value="3:30-5:30">3:30–5:30</button>
+                  <button class="choice-button" type="button" aria-pressed="false" data-choice-value="4-6">4–6</button>
+                </div>
+                <input type="hidden" name="preferredTimes" value="">
+              </fieldset>
               <div class="field-wide">
                 <label for="note">Optional note</label>
-                <textarea id="note" name="note" maxlength="2000" placeholder="Anything you’d like us to know?"></textarea>
+                <textarea id="note" name="note" maxlength="2000" placeholder="Anything you’d like me to know?"></textarea>
               </div>
               <div class="field-wide">
                 <button class="submit-button" type="submit">Send interest form</button>
@@ -574,7 +636,7 @@
       <p class="footer-name">ON DMs</p>
       <p>Location TBD</p>
       <p>Email: <a href="mailto:on@ondms.xyz">on@ondms.xyz</a></p>
-      <p class="copyright">© 2025 ON DMs After School Program.</p>
+      <p class="copyright">© 2026 ON DMs After School Program.</p>
     </div>
   </footer>
 
@@ -582,6 +644,37 @@
     const form = document.getElementById('interest-signup');
     const status = document.getElementById('form-status');
     const submitButton = form.querySelector('button[type="submit"]');
+
+    document.querySelectorAll('.choice-group').forEach((group) => {
+      const selectedValues = new Set();
+      const hiddenInput = group.querySelector('input[type="hidden"]');
+
+      group.querySelectorAll('.choice-button').forEach((button) => {
+        button.addEventListener('click', () => {
+          const value = button.dataset.choiceValue;
+          const isSelected = selectedValues.has(value);
+
+          if (isSelected) {
+            selectedValues.delete(value);
+          } else {
+            selectedValues.add(value);
+          }
+
+          button.setAttribute('aria-pressed', String(!isSelected));
+          hiddenInput.value = [...selectedValues].join(', ');
+        });
+      });
+
+    });
+
+    form.addEventListener('reset', () => {
+      document.querySelectorAll('.choice-group').forEach((group) => {
+        group.querySelectorAll('.choice-button').forEach((button) => {
+          button.setAttribute('aria-pressed', 'false');
+        });
+        group.querySelector('input[type="hidden"]').value = '';
+      });
+    });
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
