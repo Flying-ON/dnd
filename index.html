@@ -78,8 +78,8 @@
     .hero {
       position: relative;
       display: grid;
-      min-height: min(52rem, 100svh);
-      min-height: min(52rem, 100vh);
+      min-height: min(58rem, 100svh);
+      min-height: min(58rem, 100vh);
       padding: 5rem 1.5rem 9rem;
       place-items: center;
       overflow: hidden;
@@ -141,7 +141,7 @@
       position: absolute;
       bottom: 1.25rem;
       left: clamp(-5rem, calc((100vw - var(--content-width)) / 2 - 18rem), 12rem);
-      width: clamp(22rem, 43vw, 42rem);
+      width: clamp(24rem, 46vw, 45rem);
       height: auto;
       pointer-events: none;
     }
@@ -460,7 +460,7 @@
       }
 
       .hero {
-        min-height: min(46rem, 94vh);
+        min-height: 100vh;
         padding-inline: 1rem;
         padding-bottom: 8rem;
       }
@@ -468,7 +468,7 @@
       .cloud-art {
         bottom: .75rem;
         left: -3rem;
-        width: min(82vw, 28rem);
+        width: min(88vw, 31rem);
       }
 
       .about-section .content {
@@ -584,7 +584,7 @@
 
         <section class="interest-panel" id="interest-form" aria-labelledby="interest-title">
           <h2 id="interest-title">Interest Form</h2>
-          <p class="interest-intro">Let me know if another day works better or if you're out of the age range.</p>
+          <p class="interest-intro"></p>
           <form id="interest-signup" action="https://script.google.com/macros/s/AKfycbxWZRlSPg7wUlKo7Sxw6LcJfem4KDpUR3M4iz3296xIGVSbMCUnWeUjijTeGrHGUm-V/exec" method="post" autocomplete="on">
             <div class="interest-fields">
               <div>
@@ -616,8 +616,8 @@
                 <input type="hidden" name="preferredTimes" value="">
               </fieldset>
               <div class="field-wide">
-                <label for="note">Optional note</label>
-                <textarea id="note" name="note" maxlength="2000" placeholder="Anything you’d like me to know?"></textarea>
+                <label for="note">Other notes</label>
+                <textarea id="note" name="note" maxlength="2000" placeholder="Optional"></textarea>
               </div>
               <div class="field-wide">
                 <button class="submit-button" type="submit">Send interest form</button>
