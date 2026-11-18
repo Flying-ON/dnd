@@ -758,4 +758,223 @@ ul.font_100,ol.font_100{color:#080808;font-variant:normal;letter-spacing:normal;
 
 
 
+  <style>
+    #interest-form {
+      --interest-ink: #f4ebd9;
+      --interest-muted: #e4d7bf;
+      --interest-gold: #d5b47a;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0;
+      color: var(--interest-ink);
+      background: transparent;
+      font-family: "dm-sans", "DM Sans", sans-serif;
+    }
+
+    #interest-form *,
+    #interest-form *::before,
+    #interest-form *::after {
+      box-sizing: inherit;
+    }
+
+    #interest-form .interest-card {
+      width: min(100%, 46rem);
+      margin: 0 auto;
+      padding: 1.5rem clamp(1rem, 5vw, 2.5rem) 2rem;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    #interest-form .interest-intro {
+      max-width: 29rem;
+      margin: 0 auto 1.4rem;
+      color: var(--interest-muted);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    #interest-form .interest-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    #interest-form .interest-fields > div:nth-child(n + 3) {
+      grid-column: 1 / -1;
+    }
+
+    #interest-form label {
+      display: block;
+      margin-bottom: .45rem;
+      color: var(--interest-ink);
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    #interest-form .interest-required {
+      color: var(--interest-gold);
+    }
+
+    #interest-form input,
+    #interest-form textarea {
+      display: block;
+      width: 100%;
+      min-height: 3rem;
+      padding: .8rem .9rem;
+      border: 1px solid #c8b697;
+      border-radius: .45rem;
+      color: #2c1e16;
+      background: #f4ebd9;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    #interest-form textarea {
+      min-height: 7rem;
+      resize: vertical;
+    }
+
+    #interest-form input:focus,
+    #interest-form textarea:focus {
+      border-color: var(--interest-gold);
+      outline: 3px solid rgba(215, 174, 91, .2);
+      outline-offset: 1px;
+    }
+
+    #interest-form .interest-submit {
+      width: 100%;
+      min-height: 3.25rem;
+      margin-top: .35rem;
+      padding: .85rem 1rem;
+      border: 1px solid #f4ebd9;
+      border-radius: .45rem;
+      color: #2c1e16;
+      background: #f4ebd9;
+      cursor: pointer;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: background-color .18s ease, transform .18s ease;
+      grid-column: 1 / -1;
+    }
+
+    #interest-form .interest-submit:hover:not(:disabled) {
+      background: #fff8e9;
+      transform: translateY(-1px);
+    }
+
+    #interest-form .interest-submit:focus-visible {
+      outline: 3px solid var(--interest-ink);
+      outline-offset: 3px;
+    }
+
+    #interest-form .interest-submit:disabled {
+      cursor: wait;
+      opacity: .7;
+    }
+
+    #interest-form .interest-status {
+      min-height: 1.5rem;
+      margin: .8rem 0 0;
+      color: var(--interest-muted);
+      font-size: .92rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    #interest-form .interest-status[data-state="success"] {
+      color: #c7e6bd;
+    }
+
+    #interest-form .interest-status[data-state="error"] {
+      color: #ffb6a8;
+    }
+
+    @media (max-width: 560px) {
+      #interest-form .interest-fields {
+        grid-template-columns: 1fr;
+      }
+
+      #interest-form .interest-fields > div:nth-child(n + 3) {
+        grid-column: auto;
+      }
+    }
+  </style>
+
+  <section id="interest-form" aria-label="Interest form">
+    <div class="interest-card">
+      <p class="interest-intro">Complete the form and we’ll be in touch. If another day works better, include it in your note.</p>
+
+      <form id="interest-signup" action="https://script.google.com/macros/s/AKfycbzksfLcj36yVKDe9MvCS77odIfsEZkEU4LrKlzl0Wuwel-uB8roWs9vJmC0Ox7y6R8Ehg/exec" method="post">
+        <div class="interest-fields">
+          <div>
+            <label for="interest-parent-name">Parent name <span class="interest-required" aria-hidden="true">*</span></label>
+            <input id="interest-parent-name" name="parentName" type="text" autocomplete="name" maxlength="120" required>
+          </div>
+          <div>
+            <label for="interest-kid-name">Kid name <span class="interest-required" aria-hidden="true">*</span></label>
+            <input id="interest-kid-name" name="kidName" type="text" autocomplete="off" maxlength="120" required>
+          </div>
+          <div>
+            <label for="interest-email">Email <span class="interest-required" aria-hidden="true">*</span></label>
+            <input id="interest-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+          </div>
+          <div>
+            <label for="interest-note">Optional note</label>
+            <textarea id="interest-note" name="note" maxlength="2000" placeholder="Anything you’d like us to know?"></textarea>
+          </div>
+          <button class="interest-submit" type="submit">Send interest form</button>
+        </div>
+        <p class="interest-status" id="interest-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    (() => {
+      const formSection = document.getElementById('interest-form');
+      const existingInterestPanel = document.getElementById('comp-mwlexrfd');
+      if (formSection && existingInterestPanel) {
+        existingInterestPanel.append(formSection);
+      }
+
+      const form = document.getElementById('interest-signup');
+      const status = document.getElementById('interest-status');
+      const submitButton = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending…';
+        status.textContent = '';
+        status.dataset.state = '';
+
+        try {
+          const body = new URLSearchParams(new FormData(form));
+          await fetch(form.action, {
+            method: 'POST',
+            mode: 'no-cors',
+            body
+          });
+          form.reset();
+          status.dataset.state = 'success';
+          status.textContent = 'Thanks! Your interest form has been sent. We’ll be in touch.';
+        } catch (error) {
+          status.dataset.state = 'error';
+          status.textContent = 'We couldn’t send your form. Please check your connection and try again.';
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send interest form';
+        }
+      });
+    })();
+  </script>
 </body></html>
